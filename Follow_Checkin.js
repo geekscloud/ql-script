@@ -6,16 +6,22 @@ let accounts = [];
 let index = 0;
 
 while (envVars[`FOLLOW_ACCOUNT_${index}`]) {
-  const accountData = envVars[`FOLLOW_ACCOUNT_${index}`].split('\n');
-  if (accountData.length !== 2) {
-    console.log(`FOLLOW_ACCOUNT_${index} 配置错误，请确保格式为 CSRF_TOKEN 和 COOKIE 用换行分隔`);
+  const cookie = envVars[`FOLLOW_ACCOUNT_${index}`].trim();
+
+  // 从 cookie 中解析 csrfToken
+  const csrfTokenMatch = cookie.match(/authjs\.csrf-token=([^;]+)/);
+  const csrfToken = csrfTokenMatch ? csrfTokenMatch[1] : null;
+
+  if (!csrfToken) {
+    console.log(`FOLLOW_ACCOUNT_${index} 中未找到 csrfToken，请检查 cookie 配置`);
     process.exit(1);
   }
 
   accounts.push({
-    csrfToken: accountData[0].trim(),
-    cookie: accountData[1].trim()
+    csrfToken,
+    cookie
   });
+
   index++;
 }
 
@@ -25,7 +31,7 @@ if (accounts.length === 0) {
   process.exit(1);
 }
 
-console.log(`共找到 ${accounts.length} 个账号, 开始签到...`)
+console.log(`共找到 ${accounts.length} 个账号, 开始签到...`);
 
 // 主函数
 (async () => {
