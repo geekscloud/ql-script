@@ -13,7 +13,8 @@
 - 输入值: 抓取csrf请求头中的整个Cookie
   例
   ``` js
-  authjs.csrf-token=60645xxxxxxxxxxxad0f363e7359f2f6c7729d22; authjs.callback-url=https%3A%2F%2Fapp.follow.is%2Fredirect%3Fapp%3Dfollow; authjs.session-token=cee7081c-49ca-43dc-b5ac-73a0d91aed06; ph_phc_EZGEvBt830JgBHTiwpxxxxxojwEWNL_posthog=%7B%22distinct_id%22%3A%2261289273277773824%22%2C%22%24sesid%22%3Axxxxx220192b196-bd27-7feb-91c4-e8d9909ceac2%2xxxxxp%22%3Atrue%7D
+  // 就是很长不要怀疑
+  authjs.csrf-token=xxxxxx; authjs.callback-url=xxxxxx; authjs.session-token=xxxxxxx; ph_phc_EZGExxxxxxxxwEWNL_posthog=xxxxx
   ```
   
 **3. 配置定时任务 (定时任务->创建任务)**
